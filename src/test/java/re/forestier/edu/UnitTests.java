@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.player;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
@@ -29,5 +30,15 @@ public class UnitTests {
         }
         fail();
     }
+
+    @Test
+    @DisplayName("test add money")
+    void testAddMoney(){
+        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+
+        p.addMoney(20);
+        assertEquals(120, p.money);
+    }
+
 
 }
