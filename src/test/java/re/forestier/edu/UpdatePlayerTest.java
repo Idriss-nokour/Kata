@@ -2,13 +2,10 @@ package re.forestier.edu;
 
 
 import java.util.HashMap;
-import java.util.Random;
 
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.UpdatePlayer;
 import re.forestier.edu.rpg.player;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 

@@ -31,6 +31,7 @@ public class UnitTests {
 
 
 
+    @Test
     @DisplayName("AvatarClass Invalide")
     void testAvatarClassInvalid(){
         try {
