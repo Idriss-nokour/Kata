@@ -1,5 +1,8 @@
 package re.forestier.edu;
 
+
+import org.junit.jupiter.api.Test;
+
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.UpdatePlayer;
 import re.forestier.edu.rpg.player;
@@ -8,25 +11,37 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+
+
 import java.util.ArrayList;
 
 public class UnitTests {
 
     @Test
     @DisplayName("Sample test")
-    void testPlayerName() {
+
+    void testPlayerAttributs() {
         player player = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
         assertThat(player.playerName, is("Florian"));
-
-    }
-
-    @Test
-    @DisplayName("Sample test")
-    void testAvatar_name() {
-        player player = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
         assertThat(player.Avatar_name, is("Grognak le barbare"));
+        assertEquals(player.money, 100);
+        assertThat(player.getAvatarClass(), is("ADVENTURER"));
 
     }
+
+
+
+    @DisplayName("AvatarClass Invalide")
+    void testAvatarClassInvalid(){
+        try {
+        player player = new player("Florian", "Grognak le barbare", "INVALIDE_AVATAR", 100, new ArrayList<>());
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erreur : " + e.getMessage());
+        }
+
+    }
+
 
     @Test
     @DisplayName("Impossible to have negative money")
@@ -56,7 +71,12 @@ public class UnitTests {
         player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
         assertEquals(1, p.retrieveLevel());
 
+
+        System.out.println("valeur XP"+ p.getXp());
+
         UpdatePlayer.addXp(p,11);
+        assertEquals(11, p.getXp());
+
         assertEquals(2, p.retrieveLevel());
 
         UpdatePlayer.addXp(p,20);
@@ -71,6 +91,7 @@ public class UnitTests {
         assertEquals(5, p.retrieveLevel());
 
     }
+
 
 
 }
