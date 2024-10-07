@@ -133,7 +133,7 @@ public class UpdatePlayerTest {
 
     @Test
     @DisplayName("test de addxp sans changement de level")
-    void testAddXpFalse(){
+    void testAddXp(){
         player player = new player("Florian", "Ruzberg de Rivehaute", "DWARF", 200, new ArrayList<>());
         player.addMoney(400);
 
@@ -157,6 +157,61 @@ public class UpdatePlayerTest {
 
     }
 
+    @Test
+    @DisplayName("test de mise à jour des point de vie du jouer")
+    void testMajFinDeTour(){
+        player testPlayer = new player("Florian", "Gnognak le Barbare", "DWARF", 200, new ArrayList<>());
+        assertEquals(0, testPlayer.currenthealthpoints);
+        UpdatePlayer.majFinDeTour(testPlayer);
+
+        testPlayer.currenthealthpoints = 4;
+        testPlayer.healthpoints = 10 ;
+        UpdatePlayer.majFinDeTour(testPlayer);
+        assertEquals(5, testPlayer.currenthealthpoints);
+        testPlayer.currenthealthpoints = 4;
+        testPlayer.inventory.add("Holy Elixir");
+        UpdatePlayer.majFinDeTour(testPlayer);
+        assertEquals(6, testPlayer.currenthealthpoints);
+
+        player testPlayerArcher = new player("Florian", "Gnognak le Barbare", "ARCHER", 200, new ArrayList<>());
+        testPlayerArcher.currenthealthpoints = 3;
+        testPlayerArcher.healthpoints = 10 ;
+
+        UpdatePlayer.majFinDeTour(testPlayerArcher);
+        assertEquals(4, testPlayerArcher.currenthealthpoints);
+        testPlayerArcher.inventory.add("Magic Bow");
+        UpdatePlayer.majFinDeTour(testPlayerArcher);
+        assertEquals(4, testPlayerArcher.currenthealthpoints);
+
+
+
+
+        testPlayer.currenthealthpoints = 11;
+        testPlayer.healthpoints = 10 ;
+        assertEquals(11, testPlayer.currenthealthpoints);
+        assertEquals(10, testPlayer.healthpoints);
+
+        UpdatePlayer.majFinDeTour(testPlayer);
+        assertEquals(testPlayer.healthpoints, testPlayer.currenthealthpoints);
+
+        player testPlayerAdventure = new player("Florian", "Gnognak le Barbare", "ADVENTURER", 200, new ArrayList<>());
+        testPlayerAdventure.currenthealthpoints = 3;
+        testPlayerAdventure.healthpoints = 10 ;
+        UpdatePlayer.majFinDeTour(testPlayerAdventure);
+        assertEquals(4, testPlayerAdventure.currenthealthpoints);
+
+        UpdatePlayer.addXp(testPlayerAdventure, 120);
+        System.out.println("affiche de Xp"+ testPlayerAdventure.getXp());
+        UpdatePlayer.majFinDeTour(testPlayerAdventure);
+        assertEquals(6, testPlayerAdventure.currenthealthpoints);
+
+
+
+
+
+
+
+    }
 
 
 

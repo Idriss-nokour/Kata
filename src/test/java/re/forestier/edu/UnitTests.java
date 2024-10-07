@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.UpdatePlayer;
 import re.forestier.edu.rpg.player;
+
+import static java.lang.Integer.valueOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -58,6 +60,17 @@ public class UnitTests {
     }
 
     @Test
+    @DisplayName("test remove money")
+    void testRemoveMoney(){
+        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+
+        p.removeMoney(20);
+        assertEquals(80, p.money);
+
+
+    }
+
+    @Test
     @DisplayName("test add money")
     void testAddMoney(){
         player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
@@ -65,6 +78,16 @@ public class UnitTests {
         p.addMoney(20);
         assertEquals(120, p.money);
     }
+
+    @Test
+    public void testAddNullMoney() {
+        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+
+        p.addMoney(valueOf(0));
+        assertEquals(100, p.money);
+    }
+
+
 
     @Test
     @DisplayName("test de recuperation de niveau")
