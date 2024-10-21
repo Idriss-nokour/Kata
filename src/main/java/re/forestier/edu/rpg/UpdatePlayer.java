@@ -8,6 +8,8 @@ public class UpdatePlayer {
     private final static String[] objectList = {"Lookout Ring : Prevents surprise attacks","Scroll of Stupidity : INT-2 when applied to an enemy", "Draupnir : Increases XP gained by 100%", "Magic Charm : Magic +10 for 5 rounds", "Rune Staff of Curse : May burn your ennemies... Or yourself. Who knows?", "Combat Edge : Well, that's an edge", "Holy Elixir : Recover your HP"
     };
 
+
+
     public static HashMap<String, HashMap<Integer, HashMap<String, Integer>>> abilitiesPerTypeAndLevel() {
         HashMap<String, HashMap<Integer, HashMap<String, Integer>>> abilitiesPerTypeAndLevel = new HashMap<>();
 
@@ -122,7 +124,7 @@ public class UpdatePlayer {
     }
 
     // majFinDeTour met à jour les points de vie
-    public static void majFinDeTour(player player) {
+    /*public static void majFinDeTour(player player) {
         if(player.currenthealthpoints == 0) {
             System.out.println("Le joueur est KO !");
             return;
@@ -162,6 +164,46 @@ public class UpdatePlayer {
 
         if(player.currenthealthpoints >= player.healthpoints) {
             player.currenthealthpoints = player.healthpoints;
+        }
+    }*/
+
+    public static void majFinDeTour(player player) {
+        if (player.currenthealthpoints == 0) {
+            System.out.println("Le joueur est KO !");
+            return;
+        }
+
+        if (player.currenthealthpoints < player.healthpoints / 2) {
+            recuoAvatarClass(player);
+        }
+
+        if (player.currenthealthpoints >= player.healthpoints) {
+            player.currenthealthpoints = player.healthpoints;
+        }
+    }
+
+    private static void recuoAvatarClass(player player) {
+        switch (player.getAvatarClass()) {
+            case "DWARF":
+                if (player.inventory.contains("Holy Elixir")) {
+                    player.currenthealthpoints += 1; // Récupération grâce à l'élixir
+                }
+                player.currenthealthpoints += 1;
+                break;
+            case "ARCHER":
+                player.currenthealthpoints+=1;
+                if(player.inventory.contains("Magic Bow")) {
+                    player.currenthealthpoints+=player.currenthealthpoints/8-1;
+                }
+                break;
+            case "ADVENTURER":
+                player.currenthealthpoints+=2;
+                if(player.retrieveLevel() < 3) {
+                    player.currenthealthpoints-=1;
+                }
+                break;
+            default:
+                break;
         }
     }
 }

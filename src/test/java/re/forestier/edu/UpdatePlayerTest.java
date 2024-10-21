@@ -164,10 +164,10 @@ public class UpdatePlayerTest {
         assertEquals(0, testPlayer.currenthealthpoints);
         UpdatePlayer.majFinDeTour(testPlayer);
 
-        testPlayer.currenthealthpoints = 4;
+        testPlayer.currenthealthpoints = 3;
         testPlayer.healthpoints = 10 ;
         UpdatePlayer.majFinDeTour(testPlayer);
-        assertEquals(5, testPlayer.currenthealthpoints);
+        assertEquals(4, testPlayer.currenthealthpoints);
         testPlayer.currenthealthpoints = 4;
         testPlayer.inventory.add("Holy Elixir");
         UpdatePlayer.majFinDeTour(testPlayer);
