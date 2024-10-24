@@ -33,17 +33,17 @@ public class UnitTests {
 
 
 
-    @Test
+    /*@Test
     @DisplayName("AvatarClass Invalide")
     void testAvatarClassInvalid(){
         try {
-        player player = new Adventurer("Florian", "Grognak le barbare", "INVALIDE_AVATAR", 100, new ArrayList<>());
+        player player = new player("Florian", "Grognak le barbare", "INVALIDE_AVATAR", 100, new ArrayList<>());
 
         } catch (IllegalArgumentException e) {
             System.out.println("Erreur : " + e.getMessage());
         }
 
-    }
+    }*/
 
 
     @Test

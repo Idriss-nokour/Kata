@@ -32,7 +32,7 @@ public class Dwarf extends player{
     }
 
 
-    private HashMap<Integer, HashMap<String, Integer>> initializeAbilitiesDwarf() {
+    public HashMap<Integer, HashMap<String, Integer>> initializeAbilitiesDwarf() {
         HashMap<Integer, HashMap<String, Integer>> dwarf = new HashMap<>();
         HashMap<String, Integer> dwarfLevel1 = new HashMap<>();
         dwarfLevel1.put("ALC", 4);

@@ -31,7 +31,7 @@ public class Archer extends player{
     }
 
 
-    private HashMap<Integer, HashMap<String, Integer>> initializeAbilitiesArcher() {
+    public HashMap<Integer, HashMap<String, Integer>> initializeAbilitiesArcher() {
         HashMap<Integer, HashMap<String, Integer>> archerMap = new HashMap<>();
         HashMap<String, Integer> archerLevel1 = new HashMap<>();
         archerLevel1.put("INT", 1);

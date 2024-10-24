@@ -16,10 +16,7 @@ public class Adventurer extends player{
     }
 
 
-    @Override
-    public HashMap<String, Integer> getAvatarLevel(int level) {
-        return initializeAbilitiesAdventurer().get(level);
-    }
+
 
     @Override
     public void majFinDeTour() {
@@ -33,8 +30,15 @@ public class Adventurer extends player{
         }
     }
 
+    @Override
+    public HashMap<String, Integer> getAvatarLevel(int level) {
+        return initializeAbilitiesAdventurer().get(level);
+    }
 
-    private HashMap<Integer, HashMap<String, Integer>> initializeAbilitiesAdventurer() {
+
+
+
+    public HashMap<Integer, HashMap<String, Integer>> initializeAbilitiesAdventurer() {
         HashMap<Integer, HashMap<String, Integer>> adventurerMap = new HashMap<>();
         HashMap<String, Integer> adventurerLevel1 = new HashMap<>();
         adventurerLevel1.put("INT", 1);
