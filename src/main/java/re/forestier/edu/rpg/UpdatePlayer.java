@@ -1,4 +1,4 @@
-package re.forestier.edu.rpg;
+/*package re.forestier.edu.rpg;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -166,7 +166,7 @@ public class UpdatePlayer {
             player.currenthealthpoints = player.healthpoints;
         }
     }*/
-
+/*
     public static void majFinDeTour(player player) {
         if (player.currenthealthpoints == 0) {
             System.out.println("Le joueur est KO !");
@@ -182,28 +182,7 @@ public class UpdatePlayer {
         }
     }
 
-    private static void recuoAvatarClass(player player) {
-        switch (player.getAvatarClass()) {
-            case "DWARF":
-                if (player.inventory.contains("Holy Elixir")) {
-                    player.currenthealthpoints += 1; // Récupération grâce à l'élixir
-                }
-                player.currenthealthpoints += 1;
-                break;
-            case "ARCHER":
-                player.currenthealthpoints+=1;
-                if(player.inventory.contains("Magic Bow")) {
-                    player.currenthealthpoints+=player.currenthealthpoints/8-1;
-                }
-                break;
-            case "ADVENTURER":
-                player.currenthealthpoints+=2;
-                if(player.retrieveLevel() < 3) {
-                    player.currenthealthpoints-=1;
-                }
-                break;
-            default:
-                break;
-        }
+
     }
 }
+*/

@@ -2,8 +2,9 @@ package re.forestier.edu.rpg;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
-public class player {
+public abstract class player {
     public String playerName;
     public String Avatar_name;
     private String AvatarClass;
@@ -20,22 +21,20 @@ public class player {
 
     public HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
-    public player(String playerName, String avatar_name, String avatarClass, int money, ArrayList<String> inventory) {
-        if (!avatarClass.equals("ARCHER") && !avatarClass.equals("ADVENTURER") && !avatarClass.equals("DWARF") ) {
-            return;
-        }
-
+    public player(String playerName, String avatar_name, int money, ArrayList<String> inventory) {
         this.playerName = playerName;
         Avatar_name = avatar_name;
-        AvatarClass = avatarClass;
         this.money = Integer.valueOf(money);
         this.inventory = inventory;
-        this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(AvatarClass).get(1);
+        this.abilities = getAvatarLevel(1);
+        //this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(AvatarClass).get(1);
     }
 
-    public String getAvatarClass () {
-        return AvatarClass;
-    }
+    public abstract String getAvatarClass();
+
+    public abstract HashMap<String, Integer> getAvatarLevel(int level);
+
+    public abstract void majFinDeTour();
 
     public void removeMoney(int amount) throws IllegalArgumentException {
         if (money - amount < 0) {
@@ -83,5 +82,39 @@ public class player {
             1 яйцо
             1 щепотка соли
      */
+
+
+    private final static String[] objectList = {"Lookout Ring : Prevents surprise attacks","Scroll of Stupidity : INT-2 when applied to an enemy", "Draupnir : Increases XP gained by 100%", "Magic Charm : Magic +10 for 5 rounds", "Rune Staff of Curse : May burn your ennemies... Or yourself. Who knows?", "Combat Edge : Well, that's an edge", "Holy Elixir : Recover your HP"
+    };
+    public boolean addXp(player player, int xp) {
+        int currentLevel = retrieveLevel();
+        player.xp += xp;
+        int newLevel = player.retrieveLevel();
+
+        if (newLevel != currentLevel) {
+            // Player leveled-up!
+            // Give a random object
+            ;
+            Random random = new Random();
+            player.inventory.add(objectList[random.nextInt(objectList.length - 0) + 0]);
+
+            // Add/upgrade abilities to player
+            HashMap<String, Integer> abilities = getAvatarLevel(newLevel);
+            abilities.forEach((ability, level) -> {
+                player.abilities.put(ability, abilities.get(ability));
+            });
+            return true;
+        }
+        return false;
+    }
+
+
+    protected void AjoutVie(int amount) {
+        currenthealthpoints += amount;
+        if (currenthealthpoints > healthpoints) {
+            currenthealthpoints = healthpoints;
+        }
+    }
+
 
 }

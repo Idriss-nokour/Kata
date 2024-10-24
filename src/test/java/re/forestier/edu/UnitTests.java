@@ -4,7 +4,7 @@ package re.forestier.edu;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.*;
-import re.forestier.edu.rpg.UpdatePlayer;
+import re.forestier.edu.rpg.Adventurer;
 import re.forestier.edu.rpg.player;
 
 import static java.lang.Integer.valueOf;
@@ -23,7 +23,7 @@ public class UnitTests {
     @DisplayName("Sample test")
 
     void testPlayerAttributs() {
-        player player = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        player player = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>());
         assertThat(player.playerName, is("Florian"));
         assertThat(player.Avatar_name, is("Grognak le barbare"));
         assertEquals(player.money, 100);
@@ -37,7 +37,7 @@ public class UnitTests {
     @DisplayName("AvatarClass Invalide")
     void testAvatarClassInvalid(){
         try {
-        player player = new player("Florian", "Grognak le barbare", "INVALIDE_AVATAR", 100, new ArrayList<>());
+        player player = new Adventurer("Florian", "Grognak le barbare", "INVALIDE_AVATAR", 100, new ArrayList<>());
 
         } catch (IllegalArgumentException e) {
             System.out.println("Erreur : " + e.getMessage());
@@ -49,7 +49,7 @@ public class UnitTests {
     @Test
     @DisplayName("Impossible to have negative money")
     void testNegativeMoney() {
-        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        player p = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>());
 
         try {
             p.removeMoney(200);
@@ -62,7 +62,7 @@ public class UnitTests {
     @Test
     @DisplayName("test remove money")
     void testRemoveMoney(){
-        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        player p = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>());
 
         p.removeMoney(20);
         assertEquals(80, p.money);
@@ -73,7 +73,7 @@ public class UnitTests {
     @Test
     @DisplayName("test add money")
     void testAddMoney(){
-        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        player p = new Adventurer("Florian", "Grognak le barbare",  100, new ArrayList<>());
 
         p.addMoney(20);
         assertEquals(120, p.money);
@@ -81,7 +81,7 @@ public class UnitTests {
 
     @Test
     public void testAddNullMoney() {
-        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        player p = new Adventurer("Florian", "Grognak le barbare",  100, new ArrayList<>());
 
         p.addMoney(valueOf(0));
         assertEquals(100, p.money);
@@ -92,26 +92,26 @@ public class UnitTests {
     @Test
     @DisplayName("test de recuperation de niveau")
     void testRetrieveLevel(){
-        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        player p = new Adventurer("Florian", "Grognak le barbare",  100, new ArrayList<>());
         assertEquals(1, p.retrieveLevel());
 
 
         System.out.println("valeur XP"+ p.getXp());
 
-        UpdatePlayer.addXp(p,11);
+        p.addXp(p,11);
         assertEquals(11, p.getXp());
 
         assertEquals(2, p.retrieveLevel());
 
-        UpdatePlayer.addXp(p,20);
+        p.addXp(p,20);
         assertEquals(3, p.retrieveLevel());
 
 
-        UpdatePlayer.addXp(p,40);
+        p.addXp(p,40);
         assertEquals(4, p.retrieveLevel());
 
 
-        UpdatePlayer.addXp(p,100);
+        p.addXp(p,100);
         assertEquals(5, p.retrieveLevel());
 
     }
