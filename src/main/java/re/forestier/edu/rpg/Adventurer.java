@@ -3,7 +3,7 @@ package re.forestier.edu.rpg;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Adventurer extends player{
+public class Adventurer extends Player{
     public ArrayList<String> inventory;
     public Adventurer(String playerName, String avatar_name, int money, ArrayList<String> inventory) {
         super(playerName, avatar_name, money, inventory);

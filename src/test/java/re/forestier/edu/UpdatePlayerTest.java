@@ -7,7 +7,7 @@ import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.Adventurer;
 import re.forestier.edu.rpg.Archer;
 import re.forestier.edu.rpg.Dwarf;
-import re.forestier.edu.rpg.player;
+import re.forestier.edu.rpg.Player;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -142,7 +142,7 @@ public class UpdatePlayerTest {
     @Test
     @DisplayName("test de addxp sans changement de level")
     void testAddXp(){
-        player player = new Dwarf("Florian", "Ruzberg de Rivehaute", 200, new ArrayList<>());
+        Player player = new Dwarf("Florian", "Ruzberg de Rivehaute", 200, new ArrayList<>());
         player.addMoney(400);
 
         assertEquals(0, player.getXp());
@@ -181,7 +181,7 @@ public class UpdatePlayerTest {
         testPlayer.majFinDeTour();
         assertEquals(6, testPlayer.currenthealthpoints);
 
-        player testPlayerArcher = new Archer("Florian", "Gnognak le Barbare", 200, new ArrayList<>());
+        Player testPlayerArcher = new Archer("Florian", "Gnognak le Barbare", 200, new ArrayList<>());
         testPlayerArcher.currenthealthpoints = 3;
         testPlayerArcher.healthpoints = 10 ;
 

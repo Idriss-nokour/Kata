@@ -42,14 +42,14 @@ public abstract class Player {
         }
         money -= amount;
     }
-    
+
     public void addMoney(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("Amount must be positive to add money!");
         }
         money += amount;
     }
-    
+
 
 
 
@@ -63,18 +63,18 @@ public abstract class Player {
         levels.put(4, 57);  // Niveau 3 à 4
         levels.put(5, 111); // Niveau 4 à 5
         // TODO : Ajouter les niveaux suivants
-    
+
         // On boucle sur les niveaux et on trouve celui auquel l'XP correspond
         for (Map.Entry<Integer, Integer> entry : levels.entrySet()) {
             if (xp < entry.getValue()) {
                 return entry.getKey() - 1; // Retourner le niveau juste avant le seuil
             }
         }
-    
+
         // Si l'XP est supérieur à tous les seuils dans la HashMap, retourner le dernier niveau
         return levels.size() + 1; // Dernier niveau connu
     }
-    
+
 
     public int getXp() {
         return this.xp;
