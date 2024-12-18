@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Dwarf extends Player{
-    public Dwarf(String playerName, String avatar_name, int money, ArrayList<String> inventory) {
-        super(playerName, avatar_name, money, inventory);
+    public Dwarf(String playerName, String avatar_name, int money, ArrayList<InventoryObjet> inventory, int maxWeight) {
+        super(playerName, avatar_name, money, inventory, maxWeight);
 
     }
 
@@ -21,14 +21,17 @@ public class Dwarf extends Player{
 
     @Override
     public void majFinDeTour() {
-        if(currenthealthpoints == 0) {
+        if(currentHealthPoints == 0) {
             System.out.println("Le joueur est KO !");
             return;
         }
-        if(inventory.contains("Holy Elixir")) {
-            AjoutVie(1);
+        for (InventoryObjet objet : inventory) {
+            if (objet.getName().equals("Holy Elixir")) {
+                addHealth(1);
+                break;
+            }
         }
-        AjoutVie(1);
+        addHealth(1);
     }
 
 

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        Archer firstPlayer = new Archer("Florian", "Ruzberg de Rivehaute", 200, new ArrayList<>());
+        Archer firstPlayer = new Archer("Florian", "Ruzberg de Rivehaute", 200, new ArrayList<>(), 50);
         firstPlayer.addMoney(400);
         firstPlayer.addXp(firstPlayer, 15);
 

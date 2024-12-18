@@ -67,7 +67,7 @@ public class UnitTests {
     @Test
     @DisplayName("test remove money")
     void testRemoveMoney(){
-        Player p = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>());
+        Player p = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>(),60);
 
         p.removeMoney(20);
         assertEquals(80, p.money);
@@ -78,7 +78,7 @@ public class UnitTests {
     @Test
     @DisplayName("test add money")
     void testAddMoney(){
-        Player p = new Adventurer("Florian", "Grognak le barbare",  100, new ArrayList<>());
+        Player p = new Adventurer("Florian", "Grognak le barbare",  100, new ArrayList<>(), 60);
 
         p.addMoney(20);
         assertEquals(120, p.money);
@@ -86,7 +86,7 @@ public class UnitTests {
 
     @Test
     public void testAddNullMoney() {
-        Player p = new Adventurer("Florian", "Grognak le barbare",  100, new ArrayList<>());
+        Player p = new Adventurer("Florian", "Grognak le barbare",  100, new ArrayList<>(), 60);
 
         p.addMoney(valueOf(0));
         assertEquals(100, p.money);
@@ -97,7 +97,7 @@ public class UnitTests {
     @Test
     @DisplayName("test de recuperation de niveau")
     void testRetrieveLevel(){
-        Player p = new Adventurer("Florian", "Grognak le barbare",  100, new ArrayList<>());
+        Player p = new Adventurer("Florian", "Grognak le barbare",  100, new ArrayList<>(), 60);
         assertEquals(1, p.retrieveLevel());
 
 

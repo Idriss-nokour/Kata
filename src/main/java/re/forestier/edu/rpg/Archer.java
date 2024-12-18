@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Archer extends Player{
-    public Archer(String playerName, String avatar_name, int money, ArrayList<String> inventory) {
-        super(playerName, avatar_name, money, inventory);
+    public Archer(String playerName, String avatar_name, int money, ArrayList<InventoryObjet> inventory, int maxWeight) {
+        super(playerName, avatar_name, money, inventory,maxWeight);
     }
 
     @Override
@@ -20,13 +20,13 @@ public class Archer extends Player{
 
     @Override
     public void majFinDeTour() {
-        if(currenthealthpoints == 0) {
+        if(currentHealthPoints == 0) {
             System.out.println("Le joueur est KO !");
             return;
         }
-        AjoutVie(1);
+        addHealth(1);
         if(inventory.contains("Magic Bow")) {
-            AjoutVie(currenthealthpoints/8-1);
+            addHealth(currentHealthPoints/8-1);
         }
     }
 

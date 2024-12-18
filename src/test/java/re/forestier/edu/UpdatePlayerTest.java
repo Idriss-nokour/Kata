@@ -29,7 +29,7 @@ public class UpdatePlayerTest {
     @Test
     void testAbilitiesAdventurer() {
 
-        Adventurer player = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>());
+        Adventurer player = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>(), int );
 
 
         HashMap<Integer, HashMap<String, Integer>> adventurerTest = player.initializeAbilitiesAdventurer();
@@ -168,7 +168,7 @@ public class UpdatePlayerTest {
     @Test
     @DisplayName("test de mise à jour des point de vie du jouer")
     void testMajFinDeTour(){
-        Dwarf testPlayer = new Dwarf("Florian", "Gnognak le Barbare", 200, new ArrayList<>());
+        Dwarf testPlayer = new Dwarf("Florian", "Gnognak le Barbare", 200, new ArrayList<>(),50);
         assertEquals(0, testPlayer.currenthealthpoints);
         testPlayer.majFinDeTour();
 

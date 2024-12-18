@@ -9,20 +9,21 @@ import java.util.Map;
 public abstract class Player {
     public String playerName;
     public String Avatar_name;
-    private String AvatarClass;
 
     public Integer money;
     private Float __real_money__;
 
     public int level;
-    public int healthpoints;
-    public int currenthealthpoints;
+    public int healthPoints;
+    public int currentHealthPoints;
     protected int xp;
+    public int maxWeight;
+    public int currentWeight;
 
     public HashMap<String, Integer> abilities;
-    public ArrayList<String> inventory;
+    public ArrayList<InventoryObjet> inventory;
 
-    public Player(String playerName, String avatar_name, int money, ArrayList<String> inventory) {
+    public Player(String playerName, String avatar_name, int money, ArrayList<InventoryObjet> inventory, int maxWeight) {
         this.playerName = playerName;
         Avatar_name = avatar_name;
         this.money = Integer.valueOf(money);
@@ -80,26 +81,7 @@ public abstract class Player {
         return this.xp;
     }
 
-    /*
-    Ингредиенты:
-        Для теста:
 
-            250 г муки
-            125 г сливочного масла (холодное)
-            70 г сахара
-            1 яйцо
-            1 щепотка соли
-     */
-
-    private final static String[] objectList = {
-            "Lookout Ring : Prevents surprise attacks",
-            "Scroll of Stupidity : INT-2 when applied to an enemy",
-            "Draupnir : Increases XP gained by 100%",
-            "Magic Charm : Magic +10 for 5 rounds",
-            "Rune Staff of Curse : May burn your ennemies... Or yourself. Who knows?",
-            "Combat Edge : Well, that's an edge",
-            "Holy Elixir : Recover your HP"
-    };
 
     public boolean addXp(Player player, int xp) {
         int currentLevel = retrieveLevel();
@@ -107,10 +89,13 @@ public abstract class Player {
         int newLevel = player.retrieveLevel();
 
         if (newLevel != currentLevel) {
-            // Player leveled-up!
-            // Give a random object
+
             Random random = new Random();
-            player.inventory.add(objectList[random.nextInt(objectList.length)]);
+            InventoryObjet randomObjet = generateRandomObjet(random);
+
+            if (addInventory(randomObjet)) {
+                System.out.println("Le joueur a obtenu un nouvel objet : " + randomObjet.getName());
+            }
 
             // Add/upgrade abilities to player
             HashMap<String, Integer> abilities = getAvatarLevel(newLevel);
@@ -121,13 +106,57 @@ public abstract class Player {
         }
         return false;
     }
+    private InventoryObjet generateRandomObjet(Random random) {
+        // Liste des objets disponibles
+        String[] itemNames = {"Lookout Ring", "Scroll of Stupidity", "Draupnir", "Magic Charm", "Rune Staff of Curse", "Combat Edge", "Holy Elixir"};
+        String[] descriptions = {
+                "Prevents surprise attacks",
+                "INT-2 when applied to an enemy",
+                "Increases XP gained by 100%",
+                "Magic +10 for 5 rounds",
+                "May burn your enemies... Or yourself. Who knows?",
+                "Well, that's an edge",
+                "Recover your HP"
+        };
+        int[] weights = {1, 2, 3, 1, 4, 1, 2};  // Exemple de poids associés
+        int[] values = {50, 30, 100, 60, 70, 40, 20};  // Valeurs fictives des objets
 
-    protected void AjoutVie(int amount) {
-        currenthealthpoints += amount;
-        if (currenthealthpoints > healthpoints) {
-            currenthealthpoints = healthpoints;
+        int index = random.nextInt(itemNames.length);
+
+        // Création d'un objet aléatoire avec un nom, une description, un poids et une valeur
+        return new InventoryObjet(itemNames[index], descriptions[index], weights[index], values[index]);
+    }
+
+
+
+    protected void addHealth(int amount) {
+        currentHealthPoints += amount;
+        if (currentHealthPoints > healthPoints) {
+            currentHealthPoints = healthPoints;
         }
     }
+
+    public boolean addInventory(InventoryObjet inventoryObjet){
+        if (currentWeight + inventoryObjet.getWeight() > maxWeight) {
+            System.out.println("Cannot add item, maximum weight exceeded.");
+            return false;
+        }
+        inventory.add(inventoryObjet);
+        currentWeight += inventoryObjet.getWeight();
+        return true;
+
+    }
+
+    public boolean sellInventory(InventoryObjet inventoryObjet){
+        if (inventory.contains(inventoryObjet)) {
+            inventory.remove(inventoryObjet);
+            money += inventoryObjet.getValue();
+            currentWeight -= inventoryObjet.getWeight();
+            return true;
+        }
+        return false;
+    }
+
 
     @Override
     public String toString() {
