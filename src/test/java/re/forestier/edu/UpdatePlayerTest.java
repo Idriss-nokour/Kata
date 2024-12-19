@@ -169,27 +169,27 @@ public class UpdatePlayerTest {
     @DisplayName("test de mise à jour des point de vie du jouer")
     void testMajFinDeTour(){
         Dwarf testPlayer = new Dwarf("Florian", "Gnognak le Barbare", 200, new ArrayList<>(),50);
-        assertEquals(0, testPlayer.currenthealthpoints);
+        assertEquals(0, testPlayer.currentHealthPoints);
         testPlayer.majFinDeTour();
 
-        testPlayer.currenthealthpoints = 3;
-        testPlayer.healthpoints = 10 ;
+        testPlayer.currentHealthPoints = 3;
+        testPlayer.currentHealthPoints = 10 ;
         testPlayer.majFinDeTour();
-        assertEquals(4, testPlayer.currenthealthpoints);
-        testPlayer.currenthealthpoints = 4;
-        testPlayer.inventory.add("Holy Elixir");
+        assertEquals(4, testPlayer.currentHealthPoints);
+        testPlayer.currentHealthPoints = 4;
+        testPlayer.inventory.add();
         testPlayer.majFinDeTour();
-        assertEquals(6, testPlayer.currenthealthpoints);
+        assertEquals(6, testPlayer.currentHealthPoints);
 
-        Player testPlayerArcher = new Archer("Florian", "Gnognak le Barbare", 200, new ArrayList<>());
-        testPlayerArcher.currenthealthpoints = 3;
-        testPlayerArcher.healthpoints = 10 ;
+        Player testPlayerArcher = new Archer("Florian", "Gnognak le Barbare", 200, new ArrayList<>(), 50);
+        testPlayerArcher.currentHealthPoints = 3;
+        testPlayerArcher.healthPoints = 10 ;
 
         testPlayerArcher.majFinDeTour();
-        assertEquals(4, testPlayerArcher.currenthealthpoints);
+        assertEquals(4, testPlayerArcher.currentHealthPoints);
         testPlayerArcher.inventory.add("Magic Bow");
         testPlayerArcher.majFinDeTour();
-        assertEquals(4, testPlayerArcher.currenthealthpoints);
+        assertEquals(4, testPlayerArcher.currentHealthPoints);
 
 
 

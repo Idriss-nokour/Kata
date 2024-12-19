@@ -29,6 +29,7 @@ public abstract class Player {
         this.money = Integer.valueOf(money);
         this.inventory = inventory;
         this.abilities = getAvatarLevel(1);
+        this.currentWeight = 0;
     }
 
     public abstract String getAvatarClass();
@@ -50,9 +51,6 @@ public abstract class Player {
         }
         money += amount;
     }
-
-
-
 
 
 
@@ -96,7 +94,6 @@ public abstract class Player {
             if (addInventory(randomObjet)) {
                 System.out.println("Le joueur a obtenu un nouvel objet : " + randomObjet.getName());
             }
-
             // Add/upgrade abilities to player
             HashMap<String, Integer> abilities = getAvatarLevel(newLevel);
             abilities.forEach((ability, level) -> {

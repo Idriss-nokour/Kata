@@ -30,7 +30,6 @@ public class Goblin extends Player {
 
 
 
-
     public HashMap<Integer, HashMap<String, Integer>> initializeGoblinAbilities() {
         HashMap<Integer, HashMap<String, Integer>> goblinMap = new HashMap<>();
 

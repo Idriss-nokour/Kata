@@ -126,7 +126,7 @@ public class UnitTests {
     @DisplayName("Test de la méthode getAvatarClass dans Archer")
     void testGetAvatarClass() {
         // Création d'un joueur de type Archer
-        Player p = new Archer("Florian", "Grognak le barbare", 100, new ArrayList<>());
+        Player p = new Archer("Florian", "Grognak le barbare", 100, new ArrayList<>(), 60);
 
         // Test de la méthode getAvatarClass
         assertEquals("ARCHER", p.getAvatarClass(), "La classe du joueur doit être ARCHER");
@@ -137,7 +137,7 @@ public class UnitTests {
     @DisplayName("Test de la méthode getAvatarClass dans Dwarf")
     void testGetAvatarClassDwarf() {
         // Création d'un joueur de type Archer
-        Player p = new Dwarf("Florian", "Grognak le barbare", 100, new ArrayList<>());
+        Player p = new Dwarf("Florian", "Grognak le barbare", 100, new ArrayList<>(), 60);
 
         // Test de la méthode getAvatarClass
         assertEquals("DWARF", p.getAvatarClass(), "La classe du joueur doit être ARCHER");
@@ -148,7 +148,7 @@ public class UnitTests {
     @DisplayName("Test de la méthode getAvatarClass dans Adventurer")
     void testGetAvatarClassAdventurer() {
         // Création d'un joueur de type Archer
-        Player p = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>());
+        Player p = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>(), 50);
 
         // Test de la méthode getAvatarClass
         assertEquals("ADVENTURER", p.getAvatarClass(), "La classe du joueur doit être ARCHER");

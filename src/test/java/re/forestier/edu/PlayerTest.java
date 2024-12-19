@@ -34,7 +34,7 @@ public class PlayerTest {
 
     @Test
     public void testRetrieveLevelStandard() {
-        Player p = new Archer("Florian", "Grognak le barbare", 10, new ArrayList<>());  
+        Player p = new Archer("Florian", "Grognak le barbare", 10, new ArrayList<>(),60);
         p.addXp(p, 10);  // XP = 10
     
         assertEquals(2, p.retrieveLevel());  // XP est inférieur à 27, donc le niveau devrait être 2
@@ -42,7 +42,7 @@ public class PlayerTest {
     
     @Test
     public void testRetrieveLevelHigherThan5() {
-        Player p = new Adventurer("Florian", "Grognak le barbare", 10, new ArrayList<>());  
+        Player p = new Adventurer("Florian", "Grognak le barbare", 10, new ArrayList<>(), 50);
         p.addXp(p, 150);  // XP = 150
     
         assertEquals(5, p.retrieveLevel());  // XP supérieur à 111, donc le niveau devrait être 5
