@@ -3,17 +3,25 @@ package re.forestier.edu.rpg;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+<<<<<<< HEAD
 import java.util.Map;
 
+=======
+>>>>>>> 619f84e (revu de jacoco et pitTest)
 
 public abstract class Player {
     public String playerName;
     public String Avatar_name;
+<<<<<<< HEAD
+=======
+    private String AvatarClass;
+>>>>>>> 619f84e (revu de jacoco et pitTest)
 
     public Integer money;
     private Float __real_money__;
 
     public int level;
+<<<<<<< HEAD
     public int healthPoints;
     public int currentHealthPoints;
     protected int xp;
@@ -24,12 +32,25 @@ public abstract class Player {
     public ArrayList<InventoryObjet> inventory;
 
     public Player(String playerName, String avatar_name, int money, ArrayList<InventoryObjet> inventory, int maxWeight) {
+=======
+    public int healthpoints;
+    public int currenthealthpoints;
+    protected int xp;
+
+    public HashMap<String, Integer> abilities;
+    public ArrayList<String> inventory;
+
+    public Player(String playerName, String avatar_name, int money, ArrayList<String> inventory) {
+>>>>>>> 619f84e (revu de jacoco et pitTest)
         this.playerName = playerName;
         Avatar_name = avatar_name;
         this.money = Integer.valueOf(money);
         this.inventory = inventory;
         this.abilities = getAvatarLevel(1);
+<<<<<<< HEAD
         this.currentWeight = 0;
+=======
+>>>>>>> 619f84e (revu de jacoco et pitTest)
     }
 
     public abstract String getAvatarClass();
@@ -42,6 +63,7 @@ public abstract class Player {
         if (money - amount < 0) {
             throw new IllegalArgumentException("Player can't have a negative money!");
         }
+<<<<<<< HEAD
         money -= amount;
     }
 
@@ -75,11 +97,66 @@ public abstract class Player {
     }
 
 
+=======
+
+        money = Integer.parseInt(money.toString()) - amount;
+    }
+
+    public void addMoney(int amount) {
+        var value = Integer.valueOf(amount);
+        money = money + (value != null ? value : 0);
+    }
+
+    public int retrieveLevel() {
+        // (lvl-1) * 10 + round((lvl * xplvl-1)/4)
+        HashMap<Integer, Integer> levels = new HashMap<>();
+        levels.put(2, 10); // 1*10 + ((2*0)/4)
+        levels.put(3, 27); // 2*10 + ((3*10)/4)
+        levels.put(4, 57); // 3*10 + ((4*27)/4)
+        levels.put(5, 111); // 4*10 + ((5*57)/4)
+        // TODO : ajouter les prochains niveaux
+
+        if (xp < levels.get(2)) {
+            return 1;
+        } else if (xp < levels.get(3)) {
+            return 2;
+        }
+        if (xp < levels.get(4)) {
+            return 3;
+        }
+        if (xp < levels.get(5)) return 4;
+        return 5;
+    }
+
+>>>>>>> 619f84e (revu de jacoco et pitTest)
     public int getXp() {
         return this.xp;
     }
 
+<<<<<<< HEAD
 
+=======
+    /*
+    Ингредиенты:
+        Для теста:
+
+            250 г муки
+            125 г сливочного масла (холодное)
+            70 г сахара
+            1 яйцо
+            1 щепотка соли
+     */
+
+    private final static String[] objectList = {
+            "Lookout Ring : Prevents surprise attacks",
+            "Scroll of Stupidity : INT-2 when applied to an enemy",
+            "Draupnir : Increases XP gained by 100%",
+            "Magic Charm : Magic +10 for 5 rounds",
+            "Rune Staff of Curse : May burn your ennemies... Or yourself. Who knows?",
+            "Combat Edge : Well, that's an edge",
+            "Holy Elixir : Recover your HP"
+    };
+>>>>>>> 619f84e (revu de jacoco et pitTest)
 
     public boolean addXp(Player player, int xp) {
         int currentLevel = retrieveLevel();
@@ -87,6 +164,7 @@ public abstract class Player {
         int newLevel = player.retrieveLevel();
 
         if (newLevel != currentLevel) {
+<<<<<<< HEAD
 
             Random random = new Random();
             InventoryObjet randomObjet = generateRandomObjet(random);
@@ -94,6 +172,13 @@ public abstract class Player {
             if (addInventory(randomObjet)) {
                 System.out.println("Le joueur a obtenu un nouvel objet : " + randomObjet.getName());
             }
+=======
+            // Player leveled-up!
+            // Give a random object
+            Random random = new Random();
+            player.inventory.add(objectList[random.nextInt(objectList.length)]);
+
+>>>>>>> 619f84e (revu de jacoco et pitTest)
             // Add/upgrade abilities to player
             HashMap<String, Integer> abilities = getAvatarLevel(newLevel);
             abilities.forEach((ability, level) -> {
@@ -103,6 +188,7 @@ public abstract class Player {
         }
         return false;
     }
+<<<<<<< HEAD
     private InventoryObjet generateRandomObjet(Random random) {
         // Liste des objets disponibles
         String[] itemNames = {"Lookout Ring", "Scroll of Stupidity", "Draupnir", "Magic Charm", "Rune Staff of Curse", "Combat Edge", "Holy Elixir"};
@@ -155,6 +241,16 @@ public abstract class Player {
     }
 
 
+=======
+
+    protected void AjoutVie(int amount) {
+        currenthealthpoints += amount;
+        if (currenthealthpoints > healthpoints) {
+            currenthealthpoints = healthpoints;
+        }
+    }
+
+>>>>>>> 619f84e (revu de jacoco et pitTest)
     @Override
     public String toString() {
         final String[] finalString = {"Joueur " + Avatar_name + " joué par " + playerName};

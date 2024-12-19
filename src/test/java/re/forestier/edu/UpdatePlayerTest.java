@@ -181,9 +181,15 @@ public class UpdatePlayerTest {
         testPlayer.majFinDeTour();
         assertEquals(6, testPlayer.currentHealthPoints);
 
+<<<<<<< HEAD
         Player testPlayerArcher = new Archer("Florian", "Gnognak le Barbare", 200, new ArrayList<>(), 50);
         testPlayerArcher.currentHealthPoints = 3;
         testPlayerArcher.healthPoints = 10 ;
+=======
+        Player testPlayerArcher = new Archer("Florian", "Gnognak le Barbare", 200, new ArrayList<>());
+        testPlayerArcher.currenthealthpoints = 3;
+        testPlayerArcher.healthpoints = 10 ;
+>>>>>>> 619f84e (revu de jacoco et pitTest)
 
         testPlayerArcher.majFinDeTour();
         assertEquals(4, testPlayerArcher.currentHealthPoints);
