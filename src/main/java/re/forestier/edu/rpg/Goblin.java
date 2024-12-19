@@ -5,15 +5,30 @@ import java.util.HashMap;
 
 public class Goblin extends Player {
 
+<<<<<<< HEAD
     public Goblin(String playerName, String avatarName, int money, ArrayList<InventoryObjet> inventory, int maxWeight) {
         super(playerName, avatarName, money, inventory, maxWeight);
     }
 
+=======
+    // Constructeur de la classe Goblin
+    public Goblin(String playerName, String avatar_name, int money, ArrayList<String> inventory) {
+        super(playerName, avatar_name, money, inventory);
+        /*this.level = 1; // Niveau de départ
+        this.xp = 0; // XP de départ
+        this.healthpoints = 50; // Points de vie initiaux
+        this.currenthealthpoints = this.healthpoints;
+        this.abilities = getAvatarLevel(1); // Initialiser les capacités au niveau 1*/
+    }
+
+    // Retourner la classe de l'avatar
+>>>>>>> 2eed3af (ajout de la classe de goblin)
     @Override
     public String getAvatarClass() {
         return "GOBLIN";
     }
 
+<<<<<<< HEAD
     @Override
     public HashMap<String, Integer> getAvatarLevel(int level) {
         return initializeGoblinAbilities().get(level);
@@ -62,3 +77,47 @@ public class Goblin extends Player {
 
 
 }
+=======
+    // Retourner les capacités selon le niveau
+    @Override
+    public HashMap<String, Integer> getAvatarLevel(int level) {
+        HashMap<String, Integer> levelAbilities = new HashMap<>();
+        switch (level) {
+            case 1:
+                levelAbilities.put("INT", 2);
+                levelAbilities.put("ATK", 2);
+                levelAbilities.put("ALC", 1);
+                break;
+            case 2:
+                levelAbilities.put("ATK", 3);
+                levelAbilities.put("ALC", 4);
+                break;
+            case 3:
+                levelAbilities.put("VIS", 1);
+                break;
+            case 4:
+                levelAbilities.put("DEF", 1);
+                break;
+            case 5:
+                levelAbilities.put("DEF", 2);
+                levelAbilities.put("ATK", 4);
+                break;
+            default:
+                levelAbilities.put("DEFAULT", 0); // Gestion des cas par défaut
+                break;
+        }
+        return levelAbilities;
+    }
+
+    // Mettre à jour les effets de fin de tour
+    @Override
+    public void majFinDeTour() {
+        // Exemple : régénérer un point de vie si possible
+        System.out.println("Fin du tour pour le Goblin : " + Avatar_name);
+        AjoutVie(1);
+        System.out.println("Régénération de 1 HP. HP actuel : " + currenthealthpoints + "/" + healthpoints);
+    }
+}
+
+
+>>>>>>> 2eed3af (ajout de la classe de goblin)
