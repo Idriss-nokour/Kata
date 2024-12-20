@@ -3,32 +3,19 @@ package re.forestier.edu.rpg;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import java.util.Map;
 
-=======
->>>>>>> 619f84e (revu de jacoco et pitTest)
-=======
-import java.util.Map;
-
->>>>>>> 9342d62 (Description de vos changements)
 
 public abstract class Player {
     public String playerName;
     public String Avatar_name;
-<<<<<<< HEAD
-=======
-    private String AvatarClass;
->>>>>>> 619f84e (revu de jacoco et pitTest)
 
     public Integer money;
     private Float __real_money__;
 
     public int level;
-<<<<<<< HEAD
     public int healthPoints;
-    public int currentHealthPoints;
+    public int currenthealthPoints;
     protected int xp;
     public int maxWeight;
     public int currentWeight;
@@ -37,25 +24,12 @@ public abstract class Player {
     public ArrayList<InventoryObjet> inventory;
 
     public Player(String playerName, String avatar_name, int money, ArrayList<InventoryObjet> inventory, int maxWeight) {
-=======
-    public int healthpoints;
-    public int currenthealthpoints;
-    protected int xp;
-
-    public HashMap<String, Integer> abilities;
-    public ArrayList<String> inventory;
-
-    public Player(String playerName, String avatar_name, int money, ArrayList<String> inventory) {
->>>>>>> 619f84e (revu de jacoco et pitTest)
         this.playerName = playerName;
         Avatar_name = avatar_name;
         this.money = Integer.valueOf(money);
         this.inventory = inventory;
         this.abilities = getAvatarLevel(1);
-<<<<<<< HEAD
         this.currentWeight = 0;
-=======
->>>>>>> 619f84e (revu de jacoco et pitTest)
     }
 
     public abstract String getAvatarClass();
@@ -68,8 +42,6 @@ public abstract class Player {
         if (money - amount < 0) {
             throw new IllegalArgumentException("Player can't have a negative money!");
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
         money -= amount;
     }
 
@@ -103,76 +75,11 @@ public abstract class Player {
     }
 
 
-=======
-
-        money = Integer.parseInt(money.toString()) - amount;
-=======
-        money -= amount;
->>>>>>> 9342d62 (Description de vos changements)
-    }
-    
-    public void addMoney(int amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException("Amount must be positive to add money!");
-        }
-        money += amount;
-    }
-    
-
-
-
-
-
-    public int retrieveLevel() {
-        // Calculer dynamiquement les niveaux basés sur une HashMap
-        HashMap<Integer, Integer> levels = new HashMap<>();
-        levels.put(2, 10);  // Niveau 1 à 2
-        levels.put(3, 27);  // Niveau 2 à 3
-        levels.put(4, 57);  // Niveau 3 à 4
-        levels.put(5, 111); // Niveau 4 à 5
-        // TODO : Ajouter les niveaux suivants
-    
-        // On boucle sur les niveaux et on trouve celui auquel l'XP correspond
-        for (Map.Entry<Integer, Integer> entry : levels.entrySet()) {
-            if (xp < entry.getValue()) {
-                return entry.getKey() - 1; // Retourner le niveau juste avant le seuil
-            }
-        }
-    
-        // Si l'XP est supérieur à tous les seuils dans la HashMap, retourner le dernier niveau
-        return levels.size() + 1; // Dernier niveau connu
-    }
-    
-
->>>>>>> 619f84e (revu de jacoco et pitTest)
     public int getXp() {
         return this.xp;
     }
 
-<<<<<<< HEAD
 
-=======
-    /*
-    Ингредиенты:
-        Для теста:
-
-            250 г муки
-            125 г сливочного масла (холодное)
-            70 г сахара
-            1 яйцо
-            1 щепотка соли
-     */
-
-    private final static String[] objectList = {
-            "Lookout Ring : Prevents surprise attacks",
-            "Scroll of Stupidity : INT-2 when applied to an enemy",
-            "Draupnir : Increases XP gained by 100%",
-            "Magic Charm : Magic +10 for 5 rounds",
-            "Rune Staff of Curse : May burn your ennemies... Or yourself. Who knows?",
-            "Combat Edge : Well, that's an edge",
-            "Holy Elixir : Recover your HP"
-    };
->>>>>>> 619f84e (revu de jacoco et pitTest)
 
     public boolean addXp(Player player, int xp) {
         int currentLevel = retrieveLevel();
@@ -180,7 +87,6 @@ public abstract class Player {
         int newLevel = player.retrieveLevel();
 
         if (newLevel != currentLevel) {
-<<<<<<< HEAD
 
             Random random = new Random();
             InventoryObjet randomObjet = generateRandomObjet(random);
@@ -188,13 +94,6 @@ public abstract class Player {
             if (addInventory(randomObjet)) {
                 System.out.println("Le joueur a obtenu un nouvel objet : " + randomObjet.getName());
             }
-=======
-            // Player leveled-up!
-            // Give a random object
-            Random random = new Random();
-            player.inventory.add(objectList[random.nextInt(objectList.length)]);
-
->>>>>>> 619f84e (revu de jacoco et pitTest)
             // Add/upgrade abilities to player
             HashMap<String, Integer> abilities = getAvatarLevel(newLevel);
             abilities.forEach((ability, level) -> {
@@ -204,7 +103,6 @@ public abstract class Player {
         }
         return false;
     }
-<<<<<<< HEAD
     private InventoryObjet generateRandomObjet(Random random) {
         // Liste des objets disponibles
         String[] itemNames = {"Lookout Ring", "Scroll of Stupidity", "Draupnir", "Magic Charm", "Rune Staff of Curse", "Combat Edge", "Holy Elixir"};
@@ -229,9 +127,9 @@ public abstract class Player {
 
 
     protected void addHealth(int amount) {
-        currentHealthPoints += amount;
-        if (currentHealthPoints > healthPoints) {
-            currentHealthPoints = healthPoints;
+        currenthealthPoints += amount;
+        if (currenthealthPoints > healthPoints) {
+            currenthealthPoints = healthPoints;
         }
     }
 
@@ -256,17 +154,6 @@ public abstract class Player {
         return false;
     }
 
-
-=======
-
-    protected void AjoutVie(int amount) {
-        currenthealthpoints += amount;
-        if (currenthealthpoints > healthpoints) {
-            currenthealthpoints = healthpoints;
-        }
-    }
-
->>>>>>> 619f84e (revu de jacoco et pitTest)
     @Override
     public String toString() {
         final String[] finalString = {"Joueur " + Avatar_name + " joué par " + playerName};
@@ -277,9 +164,14 @@ public abstract class Player {
         });
         finalString[0] += "\n\nInventaire :";
         inventory.forEach(item -> {
-            finalString[0] += "\n   " + item;
+            finalString[0] += "\n   " + item.getName();
         });
 
         return finalString[0];
     }
+
+    
+
+
+
 }

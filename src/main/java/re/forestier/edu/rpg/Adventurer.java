@@ -4,15 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Adventurer extends Player{
-<<<<<<< HEAD
+
     public ArrayList<InventoryObjet> inventory;
     public Adventurer(String playerName, String avatar_name, int money, ArrayList<InventoryObjet> inventory, int maxWeight) {
         super(playerName, avatar_name, money, inventory, maxWeight);
-=======
-    public ArrayList<String> inventory;
-    public Adventurer(String playerName, String avatar_name, int money, ArrayList<String> inventory) {
-        super(playerName, avatar_name, money, inventory);
->>>>>>> 619f84e (revu de jacoco et pitTest)
         this.inventory = inventory;
     }
 
@@ -26,13 +21,13 @@ public class Adventurer extends Player{
 
     @Override
     public void majFinDeTour() {
-        if(currentHealthPoints == 0) {
+        if(currenthealthPoints == 0) {
             System.out.println("Le joueur est KO !");
             return;
         }
         addHealth(2);
         if(retrieveLevel() < 3) {
-            currentHealthPoints-=1;
+            currenthealthPoints-=1;
         }
     }
 

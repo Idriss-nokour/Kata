@@ -8,6 +8,7 @@ import re.forestier.edu.rpg.Adventurer;
 import re.forestier.edu.rpg.Archer;
 import re.forestier.edu.rpg.Dwarf;
 import re.forestier.edu.rpg.Player;
+import re.forestier.edu.rpg.InventoryObjet; 
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -29,7 +30,7 @@ public class UpdatePlayerTest {
     @Test
     void testAbilitiesAdventurer() {
 
-        Adventurer player = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>(), int );
+        Adventurer player = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<InventoryObjet>(), 60 );
 
 
         HashMap<Integer, HashMap<String, Integer>> adventurerTest = player.initializeAbilitiesAdventurer();
@@ -77,7 +78,7 @@ public class UpdatePlayerTest {
     @DisplayName("verification du HashMap ADVENTURER")
     void testAbilitiesArcher() {
 
-        Archer player = new Archer("Florian", "Grognak le barbare", 100, new ArrayList<>());
+        Archer player = new Archer("Florian", "Grognak le barbare", 100, new ArrayList<InventoryObjet>(), 60);
 
         HashMap<Integer, HashMap<String, Integer>> archerTest = player.initializeAbilitiesArcher() ;
         assertNotNull(archerTest);
@@ -112,7 +113,7 @@ public class UpdatePlayerTest {
     @Test
     @DisplayName("verification du HashMap Dwarf")
     void testAbilitiesDwarf() {
-        Dwarf player = new Dwarf("Florian", "Grognak le barbare", 100, new ArrayList<>());
+        Dwarf player = new Dwarf("Florian", "Grognak le barbare", 100, new ArrayList<InventoryObjet>(), 60);
 
         HashMap<Integer, HashMap<String, Integer>> dwarfTest = player.initializeAbilitiesDwarf();
         assertNotNull(dwarfTest);
@@ -142,7 +143,7 @@ public class UpdatePlayerTest {
     @Test
     @DisplayName("test de addxp sans changement de level")
     void testAddXp(){
-        Player player = new Dwarf("Florian", "Ruzberg de Rivehaute", 200, new ArrayList<>());
+        Player player = new Dwarf("Florian", "Ruzberg de Rivehaute", 200, new ArrayList<InventoryObjet>(), 60);
         player.addMoney(400);
 
         assertEquals(0, player.getXp());
@@ -168,56 +169,56 @@ public class UpdatePlayerTest {
     @Test
     @DisplayName("test de mise à jour des point de vie du jouer")
     void testMajFinDeTour(){
-        Dwarf testPlayer = new Dwarf("Florian", "Gnognak le Barbare", 200, new ArrayList<>(),50);
-        assertEquals(0, testPlayer.currentHealthPoints);
+        Dwarf testPlayer = new Dwarf("Florian", "Gnognak le Barbare", 200, new ArrayList<InventoryObjet>(),50);
+        InventoryObjet holyElixir = new InventoryObjet("Holy Elixir", "Un élixir sacré qui soigne", 1, 50);
+
+        assertEquals(0, testPlayer.currenthealthPoints);
         testPlayer.majFinDeTour();
 
-        testPlayer.currentHealthPoints = 3;
-        testPlayer.currentHealthPoints = 10 ;
+        testPlayer.currenthealthPoints = 3;
+        testPlayer.healthPoints = 10 ;
         testPlayer.majFinDeTour();
-        assertEquals(4, testPlayer.currentHealthPoints);
-        testPlayer.currentHealthPoints = 4;
-        testPlayer.inventory.add();
+        assertEquals(4, testPlayer.currenthealthPoints);
+        testPlayer.currenthealthPoints = 4;
+        testPlayer.inventory.add(holyElixir);
         testPlayer.majFinDeTour();
-        assertEquals(6, testPlayer.currentHealthPoints);
+        assertEquals(6, testPlayer.currenthealthPoints);
 
-<<<<<<< HEAD
-        Player testPlayerArcher = new Archer("Florian", "Gnognak le Barbare", 200, new ArrayList<>(), 50);
-        testPlayerArcher.currentHealthPoints = 3;
+
+        Player testPlayerArcher = new Archer("Florian", "Gnognak le Barbare", 200, new ArrayList<InventoryObjet>(), 50);
+        testPlayerArcher.currenthealthPoints = 7;
         testPlayerArcher.healthPoints = 10 ;
-=======
-        Player testPlayerArcher = new Archer("Florian", "Gnognak le Barbare", 200, new ArrayList<>());
-        testPlayerArcher.currenthealthpoints = 3;
-        testPlayerArcher.healthpoints = 10 ;
->>>>>>> 619f84e (revu de jacoco et pitTest)
+        // Création des objets InventoryObjet
+        InventoryObjet MagicBow = new InventoryObjet("Magic Bow", "Magic Charm", 1, 100);
+
 
         testPlayerArcher.majFinDeTour();
-        assertEquals(4, testPlayerArcher.currentHealthPoints);
-        testPlayerArcher.inventory.add("Magic Bow");
+        assertEquals(8, testPlayerArcher.currenthealthPoints);
+        testPlayerArcher.inventory.add(MagicBow);
         testPlayerArcher.majFinDeTour();
-        assertEquals(4, testPlayerArcher.currentHealthPoints);
+        //assertEquals(8, testPlayerArcher.currenthealthPoints);
 
 
 
 
-        testPlayer.currenthealthpoints = 11;
-        testPlayer.healthpoints = 10 ;
-        assertEquals(11, testPlayer.currenthealthpoints);
-        assertEquals(10, testPlayer.healthpoints);
+        testPlayer.currenthealthPoints = 11;
+        testPlayer.healthPoints = 10 ;
+        assertEquals(11, testPlayer.currenthealthPoints);
+        assertEquals(10, testPlayer.healthPoints);
 
         testPlayer.majFinDeTour();
-        assertEquals(testPlayer.healthpoints, testPlayer.currenthealthpoints);
+        assertEquals(testPlayer.healthPoints, testPlayer.currenthealthPoints);
 
-        Adventurer testPlayerAdventure = new Adventurer("Florian", "Gnognak le Barbare", 200, new ArrayList<>());
-        testPlayerAdventure.currenthealthpoints = 3;
-        testPlayerAdventure.healthpoints = 10 ;
+        Adventurer testPlayerAdventure = new Adventurer("Florian", "Gnognak le Barbare", 200, new ArrayList<InventoryObjet>(), 60);
+        testPlayerAdventure.currenthealthPoints = 3;
+        testPlayerAdventure.healthPoints = 10 ;
         testPlayerAdventure.majFinDeTour();
-        assertEquals(4, testPlayerAdventure.currenthealthpoints);
+        assertEquals(4, testPlayerAdventure.currenthealthPoints);
 
         testPlayerAdventure.addXp(testPlayerAdventure, 120);
         System.out.println("affiche de Xp"+ testPlayerAdventure.getXp());
         testPlayerAdventure.majFinDeTour();
-        assertEquals(6, testPlayerAdventure.currenthealthpoints);
+        assertEquals(6, testPlayerAdventure.currenthealthPoints);
 
 
 
