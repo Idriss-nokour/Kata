@@ -25,13 +25,6 @@ import java.util.HashMap;
 
 
 
-
-
-
-
-
-
-
 public class PlayerTest {
 
 
@@ -251,22 +244,23 @@ public class PlayerTest {
     }
 
     @Test
-    void testAddInventoryEdgeCaseWeightLimit() {
-        // Création d'un joueur avec un poids initial de 46 (moins que maxWeight)
-        Player player = new Adventurer("Florian", "Grognak le barbare", 10, new ArrayList<InventoryObjet>(), 50);
-        //player.currentWeight = 0;
-    
-        // Création d'un objet qui atteint exactement le poids maximum
-        InventoryObjet item = new InventoryObjet("Draupnir", "Prevents surprise attacks", 14, 50);
-    
-        // Ajout réussi
-        boolean result = player.addInventory(item);
-    
-        assertFalse(result); // L'ajout est possible
-        //assertEquals(0, player.inventory.size()); // L'inventaire contient l'objet
-        assertEquals(0, player.currentWeight); // Poids total atteint exactement le maximum
+    public void testAddInventoryEdgeCaseWeightLimit() {
+        Player player = new Adventurer("Florian", "Grognak", 100, new ArrayList<>(), 50); // maxWeight = 50
+        InventoryObjet item1 = new InventoryObjet("Item1", "Description", 30, 10);  // Poids = 30
+        InventoryObjet item2 = new InventoryObjet("Item2", "Description", 25, 5);   // Poids = 25, dépasse le poids maximal total
+
+        // Ajouter le premier objet, devrait réussir
+        boolean addedItem1 = player.addInventory(item1);
+        assertTrue(addedItem1);  // S'attendre à ce que le premier objet soit ajouté
+
+        // Ajouter le second objet, ne devrait pas être possible car le poids total dépasserait 50
+        boolean addedItem2 = player.addInventory(item2);
+        assertFalse(addedItem2);  // Le second objet ne devrait pas être ajouté
+
+
     }
-    
+
+
 }
 
 

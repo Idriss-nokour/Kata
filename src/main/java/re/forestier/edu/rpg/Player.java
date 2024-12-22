@@ -30,6 +30,7 @@ public abstract class Player {
         this.inventory = inventory;
         this.abilities = getAvatarLevel(1);
         this.currentWeight = 0;
+        this.maxWeight = maxWeight;
     }
 
     public abstract String getAvatarClass();
