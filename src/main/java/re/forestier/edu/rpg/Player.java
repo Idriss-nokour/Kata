@@ -155,7 +155,7 @@ public abstract class Player {
     }
 
 
-    /*@Override
+    @Override
     public String toString() {
         final String[] finalString = {"Joueur " + Avatar_name + " joué par " + playerName};
         finalString[0] += "\nNiveau : " + retrieveLevel() + " (XP totale : " + xp + ")";
@@ -169,7 +169,7 @@ public abstract class Player {
         });
 
         return finalString[0];
-    }*/
+    }
 
 
 
