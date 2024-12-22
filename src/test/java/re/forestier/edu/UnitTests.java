@@ -319,7 +319,7 @@ public class UnitTests {
     @Test
     public void testMajFinDeTour_levelAbove3_Adventurer() {
         // Création d'un joueur d'aventure avec un niveau supérieur ou égal à 3
-        Player p = new Adventurer("Florian", "Grognak le barbare", 10, new ArrayList<>(), 60);
+        Player p = new Adventurer("Florian", "Grognak le barbare", 10, new ArrayList<InventoryObjet>(), 60);
         // Ajouter suffisamment d'XP pour que le niveau soit supérieur ou égal à 3
         p.currenthealthPoints = 10;
         p.healthPoints = 5;
@@ -340,7 +340,7 @@ public class UnitTests {
     // Test lorsque le joueur n'a pas assez d'argent pour retirer
     @Test
     public void testremoveMoneyInsuffisant() {
-        Player p = new Archer("Florian", "Grognak le barbare",  100, new ArrayList<>(), 60);  
+        Player p = new Archer("Florian", "Grognak le barbare",  100, new ArrayList<InventoryObjet>(), 60);  
         
         // Essayer de retirer plus d'argent que ce que le joueur possède
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
