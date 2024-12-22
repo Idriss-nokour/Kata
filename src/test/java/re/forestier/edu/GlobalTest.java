@@ -15,7 +15,9 @@ public class GlobalTest {
 
     @Test
     void testAffichageBase() {
-Adventurer player = new Adventurer("Florian", "Gnognak le Barbare", 200, new ArrayList<InventoryObjet>(), 50);
+
+        Adventurer player = new Adventurer("Florian", "Gnognak le Barbare", 200, new ArrayList<>(),50);
+
         player.addXp(player, 20);
         player.inventory = new ArrayList<>();
 

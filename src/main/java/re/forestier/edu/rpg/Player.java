@@ -154,7 +154,8 @@ public abstract class Player {
         return false;
     }
 
-    @Override
+
+    /*@Override
     public String toString() {
         final String[] finalString = {"Joueur " + Avatar_name + " joué par " + playerName};
         finalString[0] += "\nNiveau : " + retrieveLevel() + " (XP totale : " + xp + ")";
@@ -168,9 +169,38 @@ public abstract class Player {
         });
 
         return finalString[0];
+    }*/
+
+
+
+    public String toMarkdown() {
+        StringBuilder markdown = new StringBuilder();
+
+        markdown.append("# Joueur ").append(Avatar_name).append(" joué par ").append(playerName).append("\n\n");
+
+        markdown.append("## Niveau\n");
+        markdown.append("**Niveau :** ").append(retrieveLevel()).append(" (**XP totale :** ").append(xp).append(")\n\n");
+
+        markdown.append("## Capacités\n");
+        abilities.forEach((name, level) -> {
+            markdown.append("* **").append(name).append("** : ").append(level).append("\n");
+        });
+
+        markdown.append("\n## Inventaire\n");
+        if (inventory.isEmpty()) {
+            markdown.append("Aucun objet dans l'inventaire.\n");
+        } else {
+            markdown.append("Liste des objets :\n");
+            inventory.forEach(item -> {
+                markdown.append("* ").append(item.getName()).append("\n");
+            });
+        }
+
+        return markdown.toString();
     }
 
-    
+
+
 
 
 

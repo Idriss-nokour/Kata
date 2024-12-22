@@ -29,7 +29,9 @@ public class UnitTests {
     @DisplayName("Sample test")
 
     void testPlayerAttributs() {
-        Player player = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>(), 60);
+
+        Player player = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>(),50);
+
         assertThat(player.playerName, is("Florian"));
         assertThat(player.Avatar_name, is("Grognak le barbare"));
         assertEquals(player.money, 100);
@@ -55,7 +57,8 @@ public class UnitTests {
     @Test
     @DisplayName("Impossible to have negative money")
     void testNegativeMoney() {
-        Player p = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>(), 60);
+
+        Player p = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>(),50);
 
         try {
             p.removeMoney(200);
@@ -162,7 +165,9 @@ public class UnitTests {
     @DisplayName("Test de la méthode majFinDeTour dans Adventurer")
     void testMajFinDeTourAdventurer() {
         // Création d'un joueur avec des points de vie à 0
-        Player p = new Adventurer("Florian", "Grognak le barbare", 0, new ArrayList<>(), 60);
+
+        Player p = new Adventurer("Florian", "Grognak le barbare", 0, new ArrayList<>(),50);
+
     
         // Redirection de la sortie console
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();

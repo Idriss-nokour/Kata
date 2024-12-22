@@ -8,7 +8,9 @@ import re.forestier.edu.rpg.Adventurer;
 import re.forestier.edu.rpg.Archer;
 import re.forestier.edu.rpg.Dwarf;
 import re.forestier.edu.rpg.Player;
-import re.forestier.edu.rpg.InventoryObjet; 
+import re.forestier.edu.rpg.InventoryObjet;
+
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -30,7 +32,8 @@ public class UpdatePlayerTest {
     @Test
     void testAbilitiesAdventurer() {
 
-        Adventurer player = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<InventoryObjet>(), 60 );
+
+        Adventurer player = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>(), 50 );
 
 
         HashMap<Integer, HashMap<String, Integer>> adventurerTest = player.initializeAbilitiesAdventurer();
@@ -78,7 +81,8 @@ public class UpdatePlayerTest {
     @DisplayName("verification du HashMap ADVENTURER")
     void testAbilitiesArcher() {
 
-        Archer player = new Archer("Florian", "Grognak le barbare", 100, new ArrayList<InventoryObjet>(), 60);
+
+        Archer player = new Archer("Florian", "Grognak le barbare", 100, new ArrayList<>(),50);
 
         HashMap<Integer, HashMap<String, Integer>> archerTest = player.initializeAbilitiesArcher() ;
         assertNotNull(archerTest);
@@ -113,7 +117,8 @@ public class UpdatePlayerTest {
     @Test
     @DisplayName("verification du HashMap Dwarf")
     void testAbilitiesDwarf() {
-        Dwarf player = new Dwarf("Florian", "Grognak le barbare", 100, new ArrayList<InventoryObjet>(), 60);
+
+        Dwarf player = new Dwarf("Florian", "Grognak le barbare", 100, new ArrayList<>(),50);
 
         HashMap<Integer, HashMap<String, Integer>> dwarfTest = player.initializeAbilitiesDwarf();
         assertNotNull(dwarfTest);
@@ -143,7 +148,8 @@ public class UpdatePlayerTest {
     @Test
     @DisplayName("test de addxp sans changement de level")
     void testAddXp(){
-        Player player = new Dwarf("Florian", "Ruzberg de Rivehaute", 200, new ArrayList<InventoryObjet>(), 60);
+
+        Player player = new Dwarf("Florian", "Ruzberg de Rivehaute", 200, new ArrayList<>(),50);
         player.addMoney(400);
 
         assertEquals(0, player.getXp());
@@ -181,6 +187,7 @@ public class UpdatePlayerTest {
         assertEquals(4, testPlayer.currenthealthPoints);
         testPlayer.currenthealthPoints = 4;
         testPlayer.inventory.add(holyElixir);
+
         testPlayer.majFinDeTour();
         assertEquals(6, testPlayer.currenthealthPoints);
 
@@ -195,6 +202,7 @@ public class UpdatePlayerTest {
         testPlayerArcher.majFinDeTour();
         assertEquals(8, testPlayerArcher.currenthealthPoints);
         testPlayerArcher.inventory.add(MagicBow);
+
         testPlayerArcher.majFinDeTour();
         //assertEquals(8, testPlayerArcher.currenthealthPoints);
 
@@ -219,11 +227,6 @@ public class UpdatePlayerTest {
         System.out.println("affiche de Xp"+ testPlayerAdventure.getXp());
         testPlayerAdventure.majFinDeTour();
         assertEquals(6, testPlayerAdventure.currenthealthPoints);
-
-
-
-
-
 
 
     }

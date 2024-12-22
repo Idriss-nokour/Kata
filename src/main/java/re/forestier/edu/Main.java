@@ -18,6 +18,8 @@ public class Main {
         System.out.println("------------------");
         firstPlayer.addXp(firstPlayer, 20);
         System.out.println(firstPlayer.toString());
+        System.out.println(firstPlayer.toMarkdown());
+
         //System.out.println(Affichage.afficherJoueur(firstPlayer));
     }
 }
