@@ -20,14 +20,14 @@ public class Archer extends Player{
 
     @Override
     public void majFinDeTour() {
-        if(currenthealthPoints == 0) {
-            System.out.println("Le joueur est KO !");
-            return;
-        }
+        checkIfKO();
         addHealth(1);
-        if(inventory.contains("Magic Bow")) {
-            addHealth(currenthealthPoints/8-1);
+        for (InventoryObjet objet : inventory) {
+            if (objet.getName().equals("Magic Bow")) {
+                addHealth(currenthealthPoints/8-1);
+            }break;
         }
+
     }
 
 

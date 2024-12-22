@@ -21,15 +21,11 @@ public class Dwarf extends Player{
 
     @Override
     public void majFinDeTour() {
-        if(currenthealthPoints == 0) {
-            System.out.println("Le joueur est KO !");
-            return;
-        }
+        checkIfKO();
         for (InventoryObjet objet : inventory) {
             if (objet.getName().equals("Holy Elixir")) {
                 addHealth(1);
-                break;
-            }
+            }break;
         }
         addHealth(1);
     }

@@ -1,6 +1,4 @@
 package re.forestier.edu;
-
-
 import java.util.HashMap;
 
 import org.junit.jupiter.api.*;
@@ -18,16 +16,38 @@ import java.util.ArrayList;
 
 public class UpdatePlayerTest {
 
+    @Test
+    @DisplayName("Test de la méthode getAvatarClass dans Archer")
+    void testGetAvatarClass() {
+        // Création d'un joueur de type Archer
 
-    /*private static HashMap<String, HashMap<Integer, HashMap<String, Integer>>> abilitiesPerTypeAndLevelTest;
+        Player p = new Archer("Florian", "Grognak le barbare", 100, new ArrayList<>(), 60);
 
-    @BeforeAll
-    static void setUp(){
-        abilitiesPerTypeAndLevelTest = UpdatePlayer.abilitiesPerTypeAndLevel();
-        System.out.println("Abilities: " + abilitiesPerTypeAndLevelTest);
-        assertNotNull(abilitiesPerTypeAndLevelTest);
+        // Test de la méthode getAvatarClass
+        assertEquals("ARCHER", p.getAvatarClass(), "La classe du joueur doit être ARCHER");
+    }
 
-    }*/
+
+    @Test
+    @DisplayName("Test de la méthode getAvatarClass dans Dwarf")
+    void testGetAvatarClassDwarf() {
+        // Création d'un joueur de type Archer
+        Player p = new Dwarf("Florian", "Grognak le barbare", 100, new ArrayList<>(), 60);
+
+        // Test de la méthode getAvatarClass
+        assertEquals("DWARF", p.getAvatarClass(), "La classe du joueur doit être ARCHER");
+    }
+
+
+    @Test
+    @DisplayName("Test de la méthode getAvatarClass dans Adventurer")
+    void testGetAvatarClassAdventurer() {
+        // Création d'un joueur de type Archer
+        Player p = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>(), 50);
+
+        // Test de la méthode getAvatarClass
+        assertEquals("ADVENTURER", p.getAvatarClass(), "La classe du joueur doit être ARCHER");
+    }
 
     @Test
     void testAbilitiesAdventurer() {
@@ -145,32 +165,7 @@ public class UpdatePlayerTest {
     }
 
 
-    @Test
-    @DisplayName("test de addxp sans changement de level")
-    void testAddXp(){
 
-        Player player = new Dwarf("Florian", "Ruzberg de Rivehaute", 200, new ArrayList<>(),50);
-        player.addMoney(400);
-
-        assertEquals(0, player.getXp());
-
-        // le joueur ne doit pas changer de niveau
-        boolean level0 = player.addXp(player, 0);
-        assertEquals(1, player.retrieveLevel());
-
-        assertFalse(level0);
-
-        // le joueur doit changer de niveau
-        boolean level1 = player.addXp(player, 11);
-        assertEquals(2, player.retrieveLevel());
-        assertTrue(level1);
-
-        boolean level2 = player.addXp(player, 20);
-        assertEquals(3, player.retrieveLevel());
-        assertTrue(level2);
-
-
-    }
 
     @Test
     @DisplayName("test de mise à jour des point de vie du jouer")
@@ -178,8 +173,11 @@ public class UpdatePlayerTest {
         Dwarf testPlayer = new Dwarf("Florian", "Gnognak le Barbare", 200, new ArrayList<InventoryObjet>(),50);
         InventoryObjet holyElixir = new InventoryObjet("Holy Elixir", "Un élixir sacré qui soigne", 1, 50);
 
-        assertEquals(0, testPlayer.currenthealthPoints);
-        testPlayer.majFinDeTour();
+        Exception exception = assertThrows(IllegalStateException.class, testPlayer::majFinDeTour);
+
+        // Vérifie le message de l'exception
+        assertEquals("Le joueur est KO !", exception.getMessage());
+
 
         testPlayer.currenthealthPoints = 3;
         testPlayer.healthPoints = 10 ;
@@ -204,7 +202,7 @@ public class UpdatePlayerTest {
         testPlayerArcher.inventory.add(MagicBow);
 
         testPlayerArcher.majFinDeTour();
-        //assertEquals(8, testPlayerArcher.currenthealthPoints);
+        assertEquals(9, testPlayerArcher.currenthealthPoints);
 
 
 
@@ -223,7 +221,7 @@ public class UpdatePlayerTest {
         testPlayerAdventure.majFinDeTour();
         assertEquals(4, testPlayerAdventure.currenthealthPoints);
 
-        testPlayerAdventure.addXp(testPlayerAdventure, 120);
+        testPlayerAdventure.addXp(120);
         System.out.println("affiche de Xp"+ testPlayerAdventure.getXp());
         testPlayerAdventure.majFinDeTour();
         assertEquals(6, testPlayerAdventure.currenthealthPoints);

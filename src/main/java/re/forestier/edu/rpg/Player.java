@@ -11,9 +11,7 @@ public abstract class Player {
     public String Avatar_name;
 
     public Integer money;
-    private Float __real_money__;
 
-    public int level;
     public int healthPoints;
     public int currenthealthPoints;
     protected int xp;
@@ -70,9 +68,7 @@ public abstract class Player {
                 return entry.getKey() - 1; // Retourner le niveau juste avant le seuil
             }
         }
-
-        // Si l'XP est supérieur à tous les seuils dans la HashMap, retourner le dernier niveau
-        return levels.size() + 1; // Dernier niveau connu
+        return levels.size() + 1;
     }
 
 
@@ -82,10 +78,10 @@ public abstract class Player {
 
 
 
-    public boolean addXp(Player player, int xp) {
+    public boolean addXp(int xp) {
         int currentLevel = retrieveLevel();
-        player.xp += xp;
-        int newLevel = player.retrieveLevel();
+        this.xp += xp;
+        int newLevel = retrieveLevel();
 
         if (newLevel != currentLevel) {
 
@@ -98,7 +94,7 @@ public abstract class Player {
             // Add/upgrade abilities to player
             HashMap<String, Integer> abilities = getAvatarLevel(newLevel);
             abilities.forEach((ability, level) -> {
-                player.abilities.put(ability, abilities.get(ability));
+                abilities.put(ability, abilities.get(ability));
             });
             return true;
         }
@@ -133,6 +129,13 @@ public abstract class Player {
             currenthealthPoints = healthPoints;
         }
     }
+
+    protected void checkIfKO() {
+        if (currenthealthPoints <= 0) {
+            throw new IllegalStateException("Le joueur est KO !");
+        }
+    }
+
 
     public boolean addInventory(InventoryObjet inventoryObjet){
         if (currentWeight + inventoryObjet.getWeight() > maxWeight) {

@@ -22,10 +22,7 @@ public class Goblin extends Player {
 
     @Override
     public void majFinDeTour() {
-        if (currenthealthPoints == 0) {
-            System.out.println("The Goblin is KO!");
-            return;
-        }
+        checkIfKO();
         addHealth(1);
     }
 

@@ -16,15 +16,9 @@ public class Adventurer extends Player{
         return "ADVENTURER";
     }
 
-
-
-
     @Override
     public void majFinDeTour() {
-        if(currenthealthPoints == 0) {
-            System.out.println("Le joueur est KO !");
-            return;
-        }
+        checkIfKO();
         addHealth(2);
         if(retrieveLevel() < 3) {
             currenthealthPoints-=1;

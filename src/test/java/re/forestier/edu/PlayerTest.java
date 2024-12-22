@@ -2,20 +2,15 @@ package re.forestier.edu;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.*;
-import re.forestier.edu.rpg.Adventurer;
-import re.forestier.edu.rpg.Archer;
-import re.forestier.edu.rpg.Dwarf;
-import re.forestier.edu.rpg.Player;
-import re.forestier.edu.rpg.InventoryObjet; 
-import re.forestier.edu.rpg.Goblin;
+import re.forestier.edu.rpg.*;
+
 
 import static java.lang.Integer.valueOf;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 import  org.junit.jupiter.api.BeforeEach;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.ByteArrayOutputStream;
@@ -28,28 +23,112 @@ import java.util.HashMap;
 public class PlayerTest {
 
 
-    
+    @Test
+    @DisplayName("Sample test")
+
+    void testPlayerAttributs() {
+
+        Player player = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>(),50);
+
+        assertThat(player.playerName, is("Florian"));
+        assertThat(player.Avatar_name, is("Grognak le barbare"));
+        assertEquals(player.money, 100);
+        assertThat(player.getAvatarClass(), is("ADVENTURER"));
+
+
+
+    }
+
+
+
+    @Test
+    @DisplayName("Impossible to have negative money")
+    void testNegativeMoney() {
+
+        Player p = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>(),50);
+
+        try {
+            p.removeMoney(200);
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+        fail();
+    }
+
+
+    @Test
+    @DisplayName("test remove money")
+    void testRemoveMoney(){
+        Player p = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>(),60);
+
+        p.removeMoney(20);
+        assertEquals(80, p.money);
+    }
+
+    @Test
+    @DisplayName("test add money")
+    void testAddMoney(){
+        Player p = new Adventurer("Florian", "Grognak le barbare",  100, new ArrayList<>(), 60);
+
+        p.addMoney(20);
+        assertEquals(120, p.money);
+    }
+
+    @Test
+    public void testAddNullMoney() {
+        Player p = new Adventurer("Florian", "Grognak le barbare",  100, new ArrayList<>(), 60);
+
+        p.addMoney(valueOf(0));
+        assertEquals(100, p.money);
+    }
+
+    @Test
+    @DisplayName("test de recuperation de niveau")
+    void testRetrieveLevel(){
+
+        Player p = new Adventurer("Florian", "Grognak le barbare",  100, new ArrayList<>(), 60);
+
+        assertEquals(1, p.retrieveLevel());
+
+
+        System.out.println("valeur XP"+ p.getXp());
+
+        p.addXp(11);
+        assertEquals(11, p.getXp());
+
+        assertEquals(2, p.retrieveLevel());
+
+        p.addXp(20);
+        assertEquals(3, p.retrieveLevel());
+
+
+        p.addXp(40);
+        assertEquals(4, p.retrieveLevel());
+
+
+        p.addXp(100);
+        assertEquals(5, p.retrieveLevel());
+
+    }
 
     @Test
     public void testRetrieveLevelStandard() {
 
         Player p = new Archer("Florian", "Grognak le barbare", 10, new ArrayList<InventoryObjet>(),60);
 
-        p.addXp(p, 10);  // XP = 10
+        p.addXp(10);
     
-        assertEquals(2, p.retrieveLevel());  // XP est inférieur à 27, donc le niveau devrait être 2
+        assertEquals(2, p.retrieveLevel());
     }
     
     @Test
     public void testRetrieveLevelHigherThan5() {
 
         Player p = new Adventurer("Florian", "Grognak le barbare", 10, new ArrayList<InventoryObjet>(), 50);
-        p.addXp(p, 150);  // XP = 150
+        p.addXp(150);  // XP = 150
     
         assertEquals(5, p.retrieveLevel());  // XP supérieur à 111, donc le niveau devrait être 5
     }
-
-
 
 
 
@@ -88,19 +167,38 @@ public class PlayerTest {
                 System.out.println("Le joueur a obtenu un nouvel objet : " + randomObjet.getName());
             }
 
-            String expectedMessage = "Le joueur a obtenu un nouvel objet : Magic Charm\n"; // Respect des détails exacts
-            //assertEquals(expectedMessage, outputStream.toString(),
-                    //"The console output should correctly log the acquired object message.");
         } finally {
             // Restaurer la sortie standard
             System.setOut(originalOut);
         }
     }
 
+    @Test
+    @DisplayName("test de addxp sans changement de level")
+    void testAddXp(){
 
-    
+        Player player = new Dwarf("Florian", "Ruzberg de Rivehaute", 200, new ArrayList<>(),50);
+        player.addMoney(400);
+
+        assertEquals(0, player.getXp());
+
+        // le joueur ne doit pas changer de niveau
+        boolean level0 = player.addXp( 0);
+        assertEquals(1, player.retrieveLevel());
+
+        assertFalse(level0);
+
+        // le joueur doit changer de niveau
+        boolean level1 = player.addXp(11);
+        assertEquals(2, player.retrieveLevel());
+        assertTrue(level1);
+
+        boolean level2 = player.addXp(20);
+        assertEquals(3, player.retrieveLevel());
+        assertTrue(level2);
 
 
+    }
 
 
     //testunitaires pour goblin
@@ -145,7 +243,7 @@ public class PlayerTest {
     @Test
     void testMajFinDeTour_KnockedOut() {
         goblin.currenthealthPoints = 0;
-        goblin.majFinDeTour();
+        Exception exception = assertThrows(IllegalStateException.class, goblin::majFinDeTour);
         assertEquals(0, goblin.currenthealthPoints, "Health points should remain 0 if Goblin is KO.");
     }
 
@@ -169,44 +267,6 @@ public class PlayerTest {
     }
 
 
-
-    
-
-    @Test
-    void testAddInventorySuccess() {
-        // Création d'un joueur
-        Player player = new Adventurer("Florian", "Grognak le barbare", 10, new ArrayList<InventoryObjet>(), 50);
-
-        // Création d'un objet à ajouter
-        InventoryObjet item = new InventoryObjet("Sword", "A sharp blade", 10, 20);
-
-        // Ajout d'inventaire avec succès
-        boolean result = player.addInventory(item);
-
-        // Assertions
-        assertEquals(false, result);
-        assertEquals(0, player.inventory.size());
-        assertEquals(0, player.currentWeight);
-        //assertEquals(item, player.inventory.get(0));
-    }
-
-    @Test
-    void testAddInventoryFailDueToWeight() {
-        // Création d'un joueur
-        Player player = new Adventurer("Florian", "Grognak le barbare", 10, new ArrayList<InventoryObjet>(), 10);
-
-        // Création d'un objet qui dépasse le poids maximum
-        InventoryObjet item = new InventoryObjet("Heavy Sword", "A very heavy blade", 15, 50);
-
-        // Ajout d'inventaire échoué
-        boolean result = player.addInventory(item);
-
-        // Assertions
-        assertEquals(false, result);
-        assertEquals(0, player.inventory.size());
-        assertEquals(0, player.currentWeight);
-    }
-
     @Test
     void testSellInventorySuccess() {
         // Création d'un joueur
@@ -221,7 +281,7 @@ public class PlayerTest {
         boolean result = player.sellInventory(item);
 
         // Assertions
-        assertEquals(true, result);
+        assertTrue( result);
         assertEquals(0, player.inventory.size());
         assertEquals(130, player.money);
         assertEquals(0, player.currentWeight);
@@ -249,9 +309,14 @@ public class PlayerTest {
         InventoryObjet item1 = new InventoryObjet("Item1", "Description", 30, 10);  // Poids = 30
         InventoryObjet item2 = new InventoryObjet("Item2", "Description", 25, 5);   // Poids = 25, dépasse le poids maximal total
 
+
+        assertEquals(0,player.currentWeight);
+
         // Ajouter le premier objet, devrait réussir
         boolean addedItem1 = player.addInventory(item1);
         assertTrue(addedItem1);  // S'attendre à ce que le premier objet soit ajouté
+
+        assertEquals(30,player.currentWeight);
 
         // Ajouter le second objet, ne devrait pas être possible car le poids total dépasserait 50
         boolean addedItem2 = player.addInventory(item2);
@@ -262,6 +327,9 @@ public class PlayerTest {
 
 
 }
+
+
+
 
 
     
